@@ -9,6 +9,7 @@ import json
 from googlesearch import search
 import re
 import webbrowser
+import multiprocessing
 
 API_KEY = "AIzaSyBkOjW6lPXQ23EbK-5NJ3NuiDUaSDFuemE"
 
@@ -25,46 +26,48 @@ def remove_html_tags(text):
     clean = re.compile('<.*?>')
     return re.sub(clean, '', text)
 
-class DataLoader:
-    def __init__(self, api_url, api_key):
-        self.api_url = api_url
-        self.api_key = api_key
+# class DataLoader:
+#     def __init__(self, api_url, api_key):
+#         self.api_url = api_url
+#         self.api_key = api_key
 
-    def load_data(self, params):
-        # Make API call using self.api_url and self.api_key
-        # Return the loaded data
-        response = requests.get(self.api_url, params=params)
-        return response.json()
+#     def load_data(self, params):
+#         # Make API call using self.api_url and self.api_key
+#         # Return the loaded data
+#         response = requests.get(self.api_url, params=params)
+#         return response.json()
     
 
 
 
 yt_search_url = "https://www.googleapis.com/youtube/v3/search"
 
+
+def search_and_open_video(qry):
+    for i in search(qry, num=1, stop=1):
+            webbrowser.open(i)
+
+def search_and_display_key(qry):
+    for i in search(qry, num=1, stop=1):
+            r = requests.get(i)
+            text = remove_html_tags(str(r.content))
+            key = re.search('with a ([A-G]) key and a (.*) mode', text)
+            print(key.group(1), key.group(2))
+
 def main():
     qry_input = str(input("Search for: "))
-    # yt_query_params = { "key"       :   API_KEY     ,
-    #                     "part"      :   "snippet"   ,
-    #                     "q"         :   qry_input   ,
-    #                     "type"      :   "video"     ,
-    #                     "maxResults":   5           }
-
-    # loader = DataLoader(yt_search_url, API_KEY)
-    # data = loader.load_data(yt_query_params)
-    # print(json.dumps(data, indent=4))
-
-
-    yt_query = qry_input + " youtube"
-
-    for i in search(yt_query, num=1, stop=1):
-        webbrowser.open(i)
-
-    google_query = qry_input + " songbpm key"
-    for i in search(google_query, num=1, stop=1):
-        r = requests.get(i)
-        text = remove_html_tags(str(r.content))
-        key = re.search('with a ([A-G]) key and a (.*) mode', text)
-        print(key.group(1), key.group(2))
+    while qry_input != "":
+        yt_query = qry_input + " youtube"
+        p1 = multiprocessing.Process(target=search_and_open_video, args=(yt_query, ))
+        
+        google_query = qry_input + " songbpm key"
+        p2 = multiprocessing.Process(target=search_and_display_key, args=(google_query, ))
+        p1.start()
+        p2.start()
+        p2.join()
+        p1.join()
+        qry_input = str(input("Search for: "))
+        
 
 
     
