@@ -5,6 +5,7 @@ google-auth==1.8.0
 google-auth-httplib2==0.0.3
 google-auth-oauthlib==0.4.1
 requests
-re
-webbrowser
-tkinter
+Flask==3.0.3
+flask-wtf==1.2.1
+python-dotenv==1.0.1
+wtforms
