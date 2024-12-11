@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="\static\style.css">
 </head>
 <body>
-<h1>Home</h1>
-    {% if url != None %}
-        <iframe width="420" height="315" src={{url}}></iframe>
-    {% endif %}
-    <h2>{{key}}</h2>
-    <form class="search-form" method="POST" novalidate>
-        {{search_form.csrf_token}}
-        {{search_form.search_field}}
-        {{search_form.search_button}}
-    </form>
-
+    <div id="heading">
+        <h1>Home</h1>
+    </div>
+    <div id="content">
+        <div id="search">
+            <form class="search-form" method="POST" novalidate>
+                {{search_form.csrf_token}}
+                {{search_form.search_field}}
+                {{search_form.search_button}}
+            </form>
+        </div>
+        <div id="results">
+            {% if url != None %}
+                <iframe width="420" height="315" src={{url}}></iframe>
+            {% endif %}
+                <h2>The Key of '{{search_form.search_field.data}}' is: {{key}}</h2>
+        </div>    
+    </div>
 </body>
 </html>

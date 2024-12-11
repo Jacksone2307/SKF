@@ -20,6 +20,7 @@ def home():
             key = ""
             url = None
 
+    print(f"key: {key}")
     return render_template('home/home.html', search_form=search_form, key=key, url=url)
 
 

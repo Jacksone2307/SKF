@@ -1,7 +1,6 @@
 import requests
 from googlesearch import search
 import re
-import webbrowser
 from multiprocessing import Process, Queue
 
 

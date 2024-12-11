@@ -1,0 +1,101 @@
+html{
+    background-image: linear-gradient(to bottom right,red 1%, crimson 20%, purple, aqua);
+    margin: 0%;
+    padding: 0%;
+
+    background-size: 150% 150%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+    text-align: center;
+
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+
+
+body{
+    margin: 0%;
+    padding: 0%;
+    background-color: transparent;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+#heading{
+    margin: 0%;
+    padding: 0%;
+    background-color: transparent;
+    min-height: 2.5rem;
+    padding-left: 1rem;
+}
+h1{
+    margin: 0%;
+    padding: 0%;
+    color: white;
+}
+#content{
+    margin: 0%;
+    padding: 0%;
+    background-color: transparent;
+    height: calc(100vh - 2.5rem);
+    font-size: 0px;
+}
+#search{
+    margin: 0%;
+    padding: 2rem 0rem 2rem 1rem;
+    background-color: transparent;
+    
+}
+form{
+    margin: 0%;
+    padding: 0%;
+}
+#search-form{
+    margin: 0%;
+    padding: 0%;
+}
+p{
+    color: white;
+    margin: 0%;
+    padding: 0%;
+}
+h2{
+    font-size: 30px;
+    margin: 0%;
+    color: white;
+}
+input{
+    margin: 0%;
+    padding: 0%;
+}
+#results{
+    margin: 0%;
+    padding: 0%;
+    background-color: transparent;
+    height: calc(100vh - 2.5rem - 4rem - 1.25rem);
+    text-align: center;
+}
+iframe{
+    margin: 0%;
+    padding: 0%;
+    border: none;
+    padding: 0vw 25vw 0vw 25vw;
+    width: 50vw;
+    height: 21.43vw;
+}
