@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>S.K.F.</title>
     <link rel="stylesheet" href="\static\style.css">
 </head>
 <body>
@@ -21,7 +21,17 @@
             {% if url != None %}
                 <iframe width="420" height="315" src={{url}}></iframe>
             {% endif %}
-                <h2>The Key of '{{search_form.search_field.data}}' is: {{key}}</h2>
+                <h2>
+                    {% if search_form.search_field.data != None%}
+                        The Key of '{{search_form.search_field.data}}'
+                        {%if key == 'NotFound'%}
+                            cannot be found.
+                        {% else %}
+                            is: {{key}}
+                        {% endif %}
+                    {% endif%}
+                    
+                </h2>
         </div>    
     </div>
 </body>
