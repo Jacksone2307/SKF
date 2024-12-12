@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simply Sound{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="\static\style.css">
+</head>
+<body>
+    {% include 'header/header.html' %}
+    {% include 'navbar/navbar.html' %}
+    {% block main %}{% endblock %}
+</body>
+</html>
