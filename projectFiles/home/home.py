@@ -1,5 +1,5 @@
 from .home_service import induce_search
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 

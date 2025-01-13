@@ -1,6 +1,7 @@
 import requests
 from googlesearch import search
 import re
+import time
 from multiprocessing import Process, Queue
 
 
@@ -27,9 +28,6 @@ def remove_html_tags(text):
 
 
 
-yt_search_url = "https://www.googleapis.com/youtube/v3/search"
-
-
 def search_and_open_video(qry, queue):
     yt_qry = qry + " youtube"
     for i in search(yt_qry, num=1, stop=1):
@@ -52,9 +50,13 @@ def search_and_display_key(qry, queue):
                 queue.put([f"{key.group(1)} {key.group(2)}"])
             except Exception as e:
                  queue.put(["NotFound"])
+    # requests.get()      ####IN THE MIDDLE OF SETTING UP SPOTIFY API
+    # pass
                  
 
 def induce_search(qry):
+    start = time.time()
+    
     q = Queue()
     p1 = Process(target=search_and_open_video, args=(qry, q))
     
@@ -66,6 +68,7 @@ def induce_search(qry):
     p1.join()
     key = q.get()[0]
     print(f"key {key}, url {url}")
+    print(f"Time taken: {time.time() - start} sec")
 
 
     return key, url

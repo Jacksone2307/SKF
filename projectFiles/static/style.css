@@ -185,3 +185,11 @@ iframe:hover{
     cursor: pointer;
     color: rgba(255,255,255,1);
 }
+
+.login-url{
+    color: inherit;
+    text-decoration: none;
+    display:block;
+    height: 100%;
+    width: 100%;
+}
