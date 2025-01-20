@@ -7,8 +7,13 @@
         <div class="search">
             <form class="search-form" method="POST" novalidate>
                 {{search_form.csrf_token}}
-                {{search_form.search_field}}
-                {{search_form.search_button}}
+                <div class="search-form-input">
+                    {{search_form.search_field}}
+                    {{search_form.search_button}}
+                </div>
+                <div class="search-form-checkboxes">
+                    Get Key: {{search_form.key_boolean}}
+                </div>
             </form>
         </div>
         <div class="results">
@@ -16,12 +21,12 @@
                 <iframe src={{url}}></iframe>
             {% endif %}
                 <h2 class="results">
-                    {% if search_form.search_field.data != None%}
-                        The Key of '{{search_form.search_field.data}}'
-                        {%if key == 'NotFound'%}
+                    {% if search_form.search_field.data != None and key != None%}
+                        The key of '{{search_form.search_field.data}}'
+                        {%if key == ""%}
                             cannot be found.
                         {% else %}
-                            is: {{key}}
+                            is: {{key.title()}}
                         {% endif %}
                     {% endif %}
                     

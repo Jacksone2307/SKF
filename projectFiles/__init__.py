@@ -51,13 +51,6 @@ def instantiate_app():
         },
         server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration',
     )
-
-    #Setup Spotify API
-    spodify_client_id = env.get("SPOTIFY_CLIENT_ID")
-    spodify_client_secret = env.get("SPOTIFY_CLIENT_SECRET")
-    token = get_token(spodify_client_id, spodify_client_secret)
-    env["SPOTIFY_ACCESS_TOKEN"] = token
-    print(f"TOKEN {env.get('SPOTIFY_ACCESS_TOKEN')}")
     
 
     #Setup routes

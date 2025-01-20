@@ -2,7 +2,7 @@ import requests
 from googlesearch import search
 import re
 import time
-from multiprocessing import Process, Queue
+import concurrent.futures
 from os import environ as env
 import json
 
@@ -34,35 +34,11 @@ def get_auth_header(token):
 def search_and_open_video(qry):
     yt_qry = qry + " youtube"
     for i in search(yt_qry, num=1, stop=1):
-            # webbrowser.open(i)
             id = i.split("=")[1]
             url = f"https://www.youtube.com/embed/{id}?autoplay=1&mute=1"
             return url
 
-# def search_spotify(token, qry):
-#     url = "https://api.spotify.com/v1/search"
-#     headers = get_auth_header(token)
-#     spotify_qry = f"?q={qry}&type=track&limit=1"      #Search for track, grab first one
-#     qry_rul = url + spotify_qry
-#     r = requests.get(qry_rul, headers=headers)
-#     json_result = json.loads(r.content)["tracks"]["items"]
-#     #Grab the id of the track
-#     try:
-#         if len(json_result) == 0:
-#              raise SongNotFoundError(qry)
-#         return json_result[0]
-        
-#     except Exception as e:
-#         return None
-
-def key_search(qry, queue):
-    # Spotify API deprecated feature
-    # url = f"https://api.spotify.com/v1/tracks/{id}"
-    # headers = get_auth_header(token)
-    # r = requests.get(url, headers=headers)
-    # print(r)
-         
-
+def key_search(qry):
     google_qry = qry + " songbpm key"
     for i in search(google_qry, num=1, stop=1):
             r = requests.get(i)
@@ -72,31 +48,25 @@ def key_search(qry, queue):
                 if key is None:
                      raise SongNotFoundError(qry)
                 print("Found KEY")
-                queue.put(f"{key.group(1)} {key.group(2)}")
+                return f"{key.group(1)} {key.group(2)}"
             except Exception as e:
-                 return "NotFound"
+                 return ""
     
     
                  
 
-def induce_search(qry):
-    start = time.time()
+def induce_search(qry, get_key):
 
-    q = Queue()
-    p = Process(target=key_search, args=(qry,q))
-    p.start()
-    p.join(timeout=10)
-    if p.is_alive():
-        p.terminate()
 
-    key = "NotFound"
-    if not q.empty() or q.qsize() > 0:
-        key = q.get()
-        
-    q.close()
 
+    key = None
+    if get_key:
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            future = executor.submit(key_search, qry)
+            try:
+                key = future.result(timeout=11)
+            except concurrent.futures.TimeoutError:
+                 key = ""
+                 
     url = search_and_open_video(qry)
-    print(f"Time taken: {time.time() - start} sec")
-
-    
     return key, url
