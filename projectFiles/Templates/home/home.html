@@ -12,10 +12,18 @@
                     {{search_form.search_button}}
                 </div>
                 <div class="search-form-checkboxes">
-                    Get Key: {{search_form.key_boolean}}
+                    <div class="checkbox-container">
+                        <div class="checkbox-container-item">
+                            Get Key:
+                        </div>
+                        <div class="checkbox-container-item">
+                            {{search_form.key_boolean}}
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
+        
         <div class="results">
             {% if url != None %}
                 <iframe src={{url}}></iframe>

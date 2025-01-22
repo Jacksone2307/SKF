@@ -87,6 +87,17 @@ form{
     color: rgba(255, 255, 255, 0.6);
     padding: 1rem;
 }
+.checkbox-container{
+    justify-content: center;
+    margin: 0%;
+    padding: 0%;
+    display: grid;
+    grid-template-columns: max-content max-content;
+}
+.checkbox-container-item{
+    padding: 0rem 0.5rem 0rem 0.5rem;
+    font-size: 1.2vw;
+}
 
 p{
     color: white;
@@ -143,12 +154,14 @@ input[type=submit]{
 }
 
 input[type=checkbox]{
-    margin-left: 1.5rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
-    border-color: black;
-    border-radius: 0.5rem;
-    border-width: 0.2rem;
+    -moz-appearance: none;
+    min-height: 0.5vw;
+    min-width: 0.5vw;
+
+}
+input[type=checkbox]:checked{
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 1);
 }
 
 .results{
