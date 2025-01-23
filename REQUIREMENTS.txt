@@ -5,3 +5,4 @@ flask-wtf==1.2.1
 python-dotenv==1.0.1
 wtforms
 authlib>=1.0
+SQLAlchemy==2.0.33

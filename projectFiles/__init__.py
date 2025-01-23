@@ -11,6 +11,9 @@ from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker, clear_mappers
 from sqlalchemy.pool import NullPool
 import projectFiles.adapters.repository as repo
+from projectFiles.adapters.database_repository import DatabaseRepository
+from projectFiles.adapters.orm import mapper_registry, map
+
 
 """Initialise our Flask application"""
 
@@ -61,8 +64,16 @@ def instantiate_app():
     db_echo = app.config['DB_ECHO']
     db_engine = create_engine(db_uri, connect_args={"check_same_thread": False}, echo=db_echo, poolclass=NullPool)
     session_fact = sessionmaker(autocommit=False, autoflush=True, bind=db_engine)
-    repo.repo_instance = SqlAlchemyRepository(session_fact)
+    repo.repo_instance = DatabaseRepository(session_fact)
 
+    if len(inspect(db_engine).get_table_names()) == 0:
+        clear_mappers()
+        mapper_registry.metadata.drop_all(db_engine)
+        mapper_registry.metadata.create_all(db_engine)
+        for table in reversed(mapper_registry.metadata.sorted_tables):
+            with db_engine.connect() as connection:
+                connection.execute(table.delete())
+    map()
 
 
     #Setup routes
