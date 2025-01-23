@@ -7,6 +7,10 @@ from pathlib import Path
 from requests import post
 import base64
 import json
+from sqlalchemy import create_engine, inspect
+from sqlalchemy.orm import sessionmaker, clear_mappers
+from sqlalchemy.pool import NullPool
+import projectFiles.adapters.repository as repo
 
 """Initialise our Flask application"""
 
@@ -52,6 +56,14 @@ def instantiate_app():
         server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration',
     )
     
+    #Setup Database
+    db_uri = app.config['DB_URI']
+    db_echo = app.config['DB_ECHO']
+    db_engine = create_engine(db_uri, connect_args={"check_same_thread": False}, echo=db_echo, poolclass=NullPool)
+    session_fact = sessionmaker(autocommit=False, autoflush=True, bind=db_engine)
+    repo.repo_instance = SqlAlchemyRepository(session_fact)
+
+
 
     #Setup routes
     @app.route("/callback", methods=["GET", "POST"])
@@ -88,7 +100,7 @@ def instantiate_app():
         from .home import home
         app.register_blueprint(home.home_blueprint)
 
-        # from .authentication import authentication
-        # app.register_blueprint(authentication.authentication_blueprint)
+        from .authentication import authentication
+        app.register_blueprint(authentication.authentication_blueprint)
 
     return app

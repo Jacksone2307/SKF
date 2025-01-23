@@ -7,13 +7,8 @@ from os import environ as env
 import json
 
 
-
-
-
-
-
-
 class SongNotFoundError(Exception):
+    """Raised when the key can't be found in key_search()"""
     def __init__(self, qry):
         self.qry = qry
 
@@ -32,6 +27,7 @@ def get_auth_header(token):
 
 
 def search_and_open_video(qry):
+    """Search for the song on youtube, and return the url of the first video, ready for autoplay."""
     yt_qry = qry + " youtube"
     for i in search(yt_qry, num=1, stop=1):
             id = i.split("=")[1]
@@ -39,6 +35,7 @@ def search_and_open_video(qry):
             return url
 
 def key_search(qry):
+    """Search for the key of the song on songbmp, and return the first one."""
     google_qry = qry + " songbpm key"
     for i in search(google_qry, num=1, stop=1):
             r = requests.get(i)
@@ -56,11 +53,10 @@ def key_search(qry):
                  
 
 def induce_search(qry, get_key):
-
-
-
+    """Search for the song and video independently."""
     key = None
     if get_key:
+        ###Find the key, with a timeout of 11 seconds.
         with concurrent.futures.ThreadPoolExecutor() as executor:
             future = executor.submit(key_search, qry)
             try:
