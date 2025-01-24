@@ -5,7 +5,11 @@ import time
 import concurrent.futures
 from os import environ as env
 import json
+from projectFiles.domainmodel.model import *
+import projectFiles.adapters.repository as repo
 
+
+repo_instance : repo.AbstractRepository = repo.repo_instance
 
 class SongNotFoundError(Exception):
     """Raised when the key can't be found in key_search()"""
@@ -66,3 +70,7 @@ def induce_search(qry, get_key):
                  
     url = search_and_open_video(qry)
     return key, url
+
+
+def save_track_to_db(track_to_save: Track):
+    repo_instance.add_track(track_to_save)

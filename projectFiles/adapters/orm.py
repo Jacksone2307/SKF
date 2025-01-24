@@ -9,7 +9,8 @@ tracks_table = Table(
     Column("id", Integer, primary_key=True, autoincrement=True),
     Column("title", String),
     Column("url", String),
-    Column("key", String, nullable=True)
+    Column("key", String, nullable=True),
+    Column("date", Date)
 )
 
 
@@ -18,4 +19,5 @@ def map():
         'title': tracks_table.c.title,
         'url': tracks_table.c.url,
         'key': tracks_table.c.key,
+        'date': tracks_table.c.date,
     })

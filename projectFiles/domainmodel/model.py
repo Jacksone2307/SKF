@@ -5,7 +5,7 @@ class Track:
     def __init__(self, title, url, key=None):
         self.title = title
         self.url = url
-        if self.key is not None:
+        if key is not None:
             self.key = key
         self.date = date.today()
     
@@ -36,5 +36,8 @@ class Track:
         if not isinstance(other, Track):
             return False
         return hash(self.date) < hash(other.date)
+    
+    def __repr__(self) -> str:
+        return f"TracK: {self.title}, {self.url}, {self.key}, {self.date}"
 
     

@@ -164,6 +164,13 @@ input[type=checkbox]:checked{
     border-color: rgba(255, 255, 255, 1);
 }
 
+
+
+.add-track-form-group{
+    height: 100%;
+    width: 100%;
+}
+
 .results{
     margin: 0%;
     padding: 0%;
@@ -225,4 +232,28 @@ iframe:hover{
     display:block;
     height: 100%;
     width: 100%;
+}
+
+button{
+    margin: 0%;
+    padding: 0%;
+    background-color: rgba(0, 0, 0, 0.0);
+    border-style: solid;
+    border-color: rgba(255,255,255,0.2);
+    border-radius: 0.5rem;
+    border-width: 0.2rem;
+    padding: 0.5rem;
+    font-size: 1.5vw;
+    transition: background-color 0.3s;
+    transition: border-color 0.3s;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+}
+
+button:focus{
+    outline: none;
+}
+button:hover{
+    background-color: rgba(0,0,0,0.5);
+    border-color: rgba(255, 255, 255, 0.8);
 }

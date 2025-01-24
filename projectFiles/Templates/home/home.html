@@ -27,8 +27,8 @@
         <div class="results">
             {% if url != None %}
                 <iframe src={{url}}></iframe>
-            {% endif %}
-                <h2 class="results">
+            
+                <h2 class="results-h2">
                     {% if search_form.search_field.data != None and key != None%}
                         The key of '{{search_form.search_field.data}}'
                         {%if key == ""%}
@@ -37,8 +37,39 @@
                             is: {{key.title()}}
                         {% endif %}
                     {% endif %}
-                    
                 </h2>
+
+                
+                
+                <button class="add-track-button" onclick="save_track('{{search_form.search_field.data}}', '{{url}}', '{{key}}');">Save to Database</button>
+            {% endif %}
+            
+            
         </div>    
+        
+        
     </div>
+
+    <script>
+        function save_track(title, url, key) {
+
+            entry = {
+                title: title,
+                url: url,
+                key: key
+            }
+            console.log(entry);
+            fetch("{{url_for('home_bp.save_track')}}", {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(entry),
+                cache: 'no-cache'
+            })
+        }
+
+    </script>
+
 {% endblock %}
