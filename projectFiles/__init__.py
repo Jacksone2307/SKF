@@ -114,4 +114,7 @@ def instantiate_app():
         from .authentication import authentication
         app.register_blueprint(authentication.authentication_blueprint)
 
+        from .catalogue import catalogue
+        app.register_blueprint(catalogue.catalogue_blueprint)
+
     return app

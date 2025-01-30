@@ -1,10 +1,10 @@
     <div class="nav-container">
-        <div class="nav-item">Link 1</div>
-        <div class="nav-item">Link 2</div>
+        <div class="nav-item"><a class = "nav-url" href="{{url_for('home_bp.home')}}">Home</a> </div>
+        <div class="nav-item"><a class = "nav-url" href="{{url_for('catalogue_bp.catalogue')}}">Catalogue</a></div>
         <div class="nav-item">Link 3</div>
         {% if 'user' in session %}
-        <div class="nav-item"><a class = "login-url" href="\logout">Logout</a></div>
+        <div class="nav-item"><a class = "nav-url" href="\logout">Logout</a></div>
         {% else %}
-        <div class="nav-item"><a class = "login-url" href="\login">Login</a></div>
+        <div class="nav-item"><a class = "nav-url" href="\login">Login</a></div>
         {% endif %}
     </div>

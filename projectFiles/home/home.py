@@ -12,8 +12,12 @@ home_blueprint = Blueprint('home_bp', __name__)
 @home_blueprint.route('/', methods=['GET', 'POST'])
 def home():
     search_form = SearchForm()
-    key = ""
-    url = None
+    
+    key, url = request.args.get("key"), request.args.get("url")
+
+    if key is None:
+        key = ""
+
     if search_form.validate_on_submit():
         try:
             key, url = induce_search(search_form.search_field.data, search_form.key_boolean.data)

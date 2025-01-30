@@ -20,4 +20,5 @@ def map():
         'url': tracks_table.c.url,
         'key': tracks_table.c.key,
         'date': tracks_table.c.date,
+        'id': tracks_table.c.id,
     })

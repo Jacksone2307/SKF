@@ -36,10 +36,11 @@ class SessionContextManager:
     
 
 class DatabaseRepository(AbstractRepository):
+
     def __init__(self, session_factory):
         super().__init__()
         self._session_cm = SessionContextManager(session_factory)
-
+        
     def close_session(self):
         self._session_cm.close_current_session()
 
@@ -55,6 +56,10 @@ class DatabaseRepository(AbstractRepository):
         with self._session_cm as scm:
             scm.session.delete(track)
             scm.commit()
+
+    def search_tracks(self, track_name: str) -> list[Track]:
+        tracks = self._session_cm.session.query(Track).filter(Track.title.like(f"%{track_name}%")).all()
+        return tracks
 
     @property
     def tracks(self) -> list[Track]:

@@ -2,7 +2,7 @@ from datetime import date
 
 class Track:
     """Class representing a musical track."""
-    def __init__(self, title, url, key=None):
+    def __init__(self, title, url, key=None, id=None):
         self.title = title
         self.url = url
         if key is not None:

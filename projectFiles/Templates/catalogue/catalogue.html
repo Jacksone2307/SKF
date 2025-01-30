@@ -1,0 +1,29 @@
+{% extends 'layout/layout.html' %}
+{% block title %}
+ - Catalogue
+{% endblock %}
+
+{% block main %}
+<div class="content">
+    <div class="search">
+        <div class="search-form">
+            <form class="search-form" method="POST" novalidate>
+                {{search_form.csrf_token}}
+                <div class="search-form-input">
+                    {{search_form.search_field}}
+                    {{search_form.search_button}}
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="catalogue-list">
+        {% for track in tracks %}
+            <div class="catalogue-item">
+                <a href="{{url_for('home_bp.home', key=track.key, url=track.url)}}"><h2>{{track.title}}{% if track.key != 'None'%}
+                     - {{track.key}}
+                     {%endif%}</h2></a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

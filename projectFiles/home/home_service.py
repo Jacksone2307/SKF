@@ -1,10 +1,7 @@
 import requests
 from googlesearch import search
 import re
-import time
 import concurrent.futures
-from os import environ as env
-import json
 from projectFiles.domainmodel.model import *
 import projectFiles.adapters.repository as repo
 
@@ -64,7 +61,7 @@ def induce_search(qry, get_key):
         with concurrent.futures.ThreadPoolExecutor() as executor:
             future = executor.submit(key_search, qry)
             try:
-                key = future.result(timeout=11)
+                key = future.result(timeout=16)
             except concurrent.futures.TimeoutError:
                  key = ""
                  
