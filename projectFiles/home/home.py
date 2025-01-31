@@ -29,11 +29,8 @@ def home():
 @home_blueprint.route('/save-track', methods=['POST'])
 def save_track():
     r = request.get_json()
-    print(f"r = {r}")
     track = Track(r["title"], r["url"], r["key"])
-    print(f"Saving {track} to db. ")
     save_track_to_db(track)
-    print("Saved track to db.")
     response = make_response(jsonify({"message": "JSON received"}), 200)
     return response
 

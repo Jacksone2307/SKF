@@ -16,11 +16,16 @@
             </form>
         </div>
     </div>
+    {% if search_form.search_field.data != None %}
+        <div class="search-response">
+            <h2>Searching for: '{{search_form.search_field.data}}'</h2>
+        </div>
+    {% endif %}
     <div class="catalogue-list">
         {% for track in tracks %}
             <div class="catalogue-item">
                 <a href="{{url_for('home_bp.home', key=track.key, url=track.url)}}"><h2>{{track.title}}{% if track.key != 'None'%}
-                     - {{track.key}}
+                     - {{track.key.title()}}
                      {%endif%}</h2></a>
             </div>
         {% endfor %}

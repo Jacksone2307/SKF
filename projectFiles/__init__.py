@@ -13,12 +13,13 @@ from sqlalchemy.pool import NullPool
 import projectFiles.adapters.repository as repo
 from projectFiles.adapters.database_repository import DatabaseRepository
 from projectFiles.adapters.orm import mapper_registry, map
-
+from googleapiclient.discovery import build
+from projectFiles.domainmodel.model import *
 
 """Initialise our Flask application"""
 
 
-oauth = None
+
 
 def get_token(client_id, client_secret):
     """Obtain an access token from Spotify."""
@@ -58,7 +59,7 @@ def instantiate_app():
         },
         server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration',
     )
-    
+
     #Setup Database
     db_uri = app.config['DB_URI']
     db_echo = app.config['DB_ECHO']
@@ -74,6 +75,24 @@ def instantiate_app():
             with db_engine.connect() as connection:
                 connection.execute(table.delete())
     map()
+
+
+    # ###TEST PLAYLISTS
+    # plist = Playlist("John Smith", "Playlist01")
+    # t1 = Track("Don't Look Back In Anger", "https://www.youtube.com/embed/r8OipmKFDeM?autoplay=1&mute=1")
+    # t2 = Track("Layla", "https://www.youtube.com/embed/fX5USg8_1gA?autoplay=1&mute=1")
+
+    # print(f"plist: {plist}")
+    # plist.add_track(t1)
+    # print(f"plist: {plist}")
+    # plist.add_track(t2)
+    # print(f"plist: {plist}")
+    # plist.add_track(t1)
+    # print(f"plist: {plist}")
+    # plist.remove_track(t2)
+    # print(f"plist: {plist}")
+    # plist.remove_track(t2)
+    # print(f"plist: {plist}")
 
 
     #Setup routes
@@ -116,5 +135,8 @@ def instantiate_app():
 
         from .catalogue import catalogue
         app.register_blueprint(catalogue.catalogue_blueprint)
+
+        from .playlists import playlists
+        app.register_blueprint(playlists.playlists_blueprint)
 
     return app

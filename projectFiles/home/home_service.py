@@ -70,4 +70,8 @@ def induce_search(qry, get_key):
 
 
 def save_track_to_db(track_to_save: Track):
+    similarTracks = repo_instance.search_tracks(track_to_save.title)
+    for track in similarTracks:
+         if track == track_to_save:
+              return 1
     repo_instance.add_track(track_to_save)
