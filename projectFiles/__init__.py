@@ -77,23 +77,6 @@ def instantiate_app():
     map()
 
 
-    # ###TEST PLAYLISTS
-    # plist = Playlist("John Smith", "Playlist01")
-    # t1 = Track("Don't Look Back In Anger", "https://www.youtube.com/embed/r8OipmKFDeM?autoplay=1&mute=1")
-    # t2 = Track("Layla", "https://www.youtube.com/embed/fX5USg8_1gA?autoplay=1&mute=1")
-
-    # print(f"plist: {plist}")
-    # plist.add_track(t1)
-    # print(f"plist: {plist}")
-    # plist.add_track(t2)
-    # print(f"plist: {plist}")
-    # plist.add_track(t1)
-    # print(f"plist: {plist}")
-    # plist.remove_track(t2)
-    # print(f"plist: {plist}")
-    # plist.remove_track(t2)
-    # print(f"plist: {plist}")
-
 
     #Setup routes
     @app.route("/callback", methods=["GET", "POST"])

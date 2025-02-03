@@ -12,4 +12,10 @@ def playlists():
 
     return render_template('playlists/playlists.html')
     
-    
+
+class PlaylistSearchForm(FlaskForm):
+    search_field  = StringField("Playlist Name: ", render_kw={"placeholder" : "Playlist Name..."})
+    search_button = SubmitField('Search')
+
+class PlaylistCreateForm(FlaskForm):
+    name_field = StringField("Playlist Name: ", render_kw={"placeholder": "Playlist Name..."})
