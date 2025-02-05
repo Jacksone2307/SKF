@@ -50,23 +50,24 @@ class Playlist:
         self.user = user
         self.title = title
         if tracks is None:
-            self.tracks = {}
+            # self.tracks = {}
+            self.tracks = []
         else:
             self.tracks = tracks
-    
+
     def add_track(self, track):
-        if hash(track) not in self.tracks:
-            self.tracks[hash(track)] = track
+        if track not in self.tracks:
+            self.tracks.append(track)
         else:
             print("Track already in playlist")
     
     def remove_track(self, track):
-        if hash(track) in self.tracks:
-            self.tracks.pop(hash(track))
+        if track in self.tracks:
+            self.tracks.remove(track)
         else:
             print("Track not in playlist")
     
     def __repr__(self) -> str:
-        return f"Playlist: {self.title}, {self.user}: " + str([self.tracks[key].title for key in self.tracks]) 
+        return f"Playlist: {self.title}, {self.user}: " + str([track.title for track in self.tracks]) 
 
     

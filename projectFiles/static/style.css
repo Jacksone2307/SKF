@@ -69,9 +69,14 @@ a{
 }
 .search{
     margin: 0%;
-    padding: 2rem 0rem 2rem 1rem;
+    padding: 2rem 0rem 0.5rem 1rem;
     background-color: transparent;
     
+}
+.create{
+    margin: 0%;
+    padding: 0rem 0rem 0rem 1rem;
+    background-color: transparent;
 }
 form{
     margin: 0%;
@@ -83,6 +88,19 @@ form{
 }
 .search-form-input{
     margin: 0%;
+    padding: 0%;
+}
+
+.create-form{
+    margin: 0%;
+    padding: 0%;
+
+    h2{
+        color:rgba(255, 255, 255, 0.6);
+    }
+}
+.create-form-input{
+    margin: 0.5rem 0rem 0rem 0rem;
     padding: 0%;
 }
 

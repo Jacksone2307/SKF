@@ -5,6 +5,40 @@
 
 {% block main %}
 <div class="content">
-    <h2>Playlists</h2>
+    <div class="search">
+        <div class="search-form">
+            <form class="search-form" method="POST" novalidate>
+                {{search_form.csrf_token}}
+                <div class="search-form-input">
+                    {{search_form.search_field}}
+                    {{search_form.search_button}}
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="create">
+        <div class="create-form">
+            <form class="create-form", method="POST" novalidate>
+                <h2>Create Playlist</h2>
+                {{create_form.csrf_token}}
+                <div class = "create-form-input">
+                    {{create_form.name_field}}
+                    {{create_form.create_button}}
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if search_form.search_field.data != None and search_form.search_field.data != "" %}
+        <div class="search-response">
+            <h2>Searching for: '{{search_form.search_field.data}}'</h2>
+        </div>
+    {% endif %}
+    <div class="catalogue-list">
+        {% for playlist in playlists %}
+            <div class="catalogue-item">
+                <a href="{{url_for('home_bp.home')}}"><h2>{{playlist.title}}</h2></a>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
