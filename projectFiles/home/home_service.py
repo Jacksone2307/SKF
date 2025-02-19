@@ -29,8 +29,9 @@ def get_auth_header(token):
 
 def search_and_open_video(qry):
     """Search for the song on youtube, and return the url of the first video, ready for autoplay."""
-    yt_qry = qry + " youtube"
+    yt_qry = 'site:youtube.com ' + qry
     for i in search(yt_qry, num=1, stop=1):
+            print(i)
             id = i.split("=")[1]
             url = f"https://www.youtube.com/embed/{id}?autoplay=1&mute=1"
             return url
@@ -45,7 +46,6 @@ def key_search(qry):
             try:
                 if key is None:
                      raise SongNotFoundError(qry)
-                print("Found KEY")
                 return f"{key.group(1)} {key.group(2)}"
             except Exception as e:
                  return ""

@@ -29,8 +29,8 @@
                 <iframe src={{url}}></iframe>
             
                 <h2 class="results-h2">
-                    {% if search_form.search_field.data != None and key != None%}
-                        The key of '{{search_form.search_field.data}}'
+                    {% if key != None and key != 'None' %}
+                        The key
                         {%if key == ""%}
                             cannot be found.
                         {% else %}
@@ -49,6 +49,7 @@
         
         
     </div>
+
 
     <script>
         function save_track(title, url, key) {

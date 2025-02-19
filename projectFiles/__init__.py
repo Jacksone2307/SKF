@@ -76,8 +76,6 @@ def instantiate_app():
                 connection.execute(table.delete())
     map()
 
-
-
     #Setup routes
     @app.route("/callback", methods=["GET", "POST"])
     def callback():

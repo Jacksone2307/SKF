@@ -60,6 +60,10 @@ class DatabaseRepository(AbstractRepository):
     def search_tracks(self, track_name: str) -> list[Track]:
         tracks = self._session_cm.session.query(Track).filter(Track.title.like(f"%{track_name}%")).all()
         return tracks
+    
+    def get_track(self, track_id: int) -> Track:
+        track = self._session_cm.session.query(Track).filter(Track.id == track_id).one()
+        return track
 
     @property
     def tracks(self) -> list[Track]:
@@ -67,13 +71,17 @@ class DatabaseRepository(AbstractRepository):
         return tracks
     
     def add_playlist(self, user, playlist):
-
         if self.find_playlist(user, playlist.title) is None:
             with self._session_cm as scm:
                 scm.session.merge(playlist)
                 scm.commit()
         else:
             print("Playlist already exists, use another name.")
+
+    def update_playlist(self, playlist):
+        with self._session_cm as scm:
+            scm.session.merge(playlist)
+            scm.commit()
 
     def remove_playlist(self, playlist):
         with self._session_cm as scm:
@@ -93,3 +101,8 @@ class DatabaseRepository(AbstractRepository):
             if playlist.title == playlist_name:
                 return playlist
         return None 
+    
+    def search_tracks_in_playlist(self, user, playlist_name, track_name) -> list[Track]:
+        playlist = self.find_playlist(user, playlist_name)
+        ###Go through each track associated with playlist in playlist_tracks table. Then look at each track and see
+        ###if it has a similar title.

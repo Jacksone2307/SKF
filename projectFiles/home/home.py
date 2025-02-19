@@ -24,6 +24,7 @@ def home():
         except:
             key = ""
             url = None
+    print(f"Key: {key}, url: {url}")
     return render_template('home/home.html', search_form=search_form, key=key, url=url)
 
 @home_blueprint.route('/save-track', methods=['POST'])

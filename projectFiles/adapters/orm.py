@@ -34,13 +34,13 @@ def map():
         'url': tracks_table.c.url,
         'key': tracks_table.c.key,
         'date': tracks_table.c.date,
-        'id': tracks_table.c.id,
+        'id': tracks_table.c.id
     })
 
     mapper_registry.map_imperatively(Playlist, playlists_table, properties={
         'title': playlists_table.c.title,
         'user': playlists_table.c.user,
         'id': playlists_table.c.id,
-        'tracks': relationship(Track, secondary=playlist_tracks_table),
+        'tracks': relationship(Track, secondary=playlist_tracks_table)
     })
 

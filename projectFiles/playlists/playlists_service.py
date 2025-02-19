@@ -20,3 +20,15 @@ def search_playlists(name) -> list[Playlist]:
     if name is None:
         return get_playlists(user)
     return repo_instance.search_playlists(user, name)
+
+def get_track(track_id) -> list[Track]:
+    return repo_instance.get_track(track_id)
+
+def add_to_playlist(playlist: Playlist, track: Track):
+    user = session["user"]["userinfo"]["email"]
+    playlist.add_track(track)
+    repo_instance.update_playlist(playlist)
+
+def search_tracks(playlist_name, track_name):
+    """LAST HERE, SEARCHING WAS JUST SEARCHING THROUGH ALL TRACKS, SHOWING TRACKS NOT IN PLAYLIST."""
+    return repo_instance.search_tracks_in_playlist(playlist_name, track_name)

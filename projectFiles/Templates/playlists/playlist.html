@@ -1,10 +1,14 @@
 {% extends 'layout/layout.html' %}
 {% block title %}
- - Catalogue
+ - {{playlist}}
 {% endblock %}
 
 {% block main %}
+
 <div class="content">
+    <div class="playlist-header">
+        <h2>{{playlist}}</h2>
+    </div>
     <div class="search">
         <div class="search-form">
             <form class="search-form" method="POST" novalidate>
@@ -16,7 +20,7 @@
             </form>
         </div>
     </div>
-    {% if search_form.search_field.data != None and search_form.search_field.data.strip() != ""%}
+    {% if search_form.search_field.data != None  and search_form.search_field.data.strip() != ""%}
         <div class="search-response">
             <h2>Searching for: '{{search_form.search_field.data}}'</h2>
         </div>
@@ -33,8 +37,8 @@
                     <div class="catalogue-item" id="catalogue-selector-container">
                         <select class="catalogue-playlist-select">
                             <option value="" disabled selected hidden>+</option>
-                            {% for playlist in playlists %}
-                            <option onclick='add_to_playlist("{{playlist.title}}", "{{track.id}}")'>{{playlist.title}}</option>
+                            {% for playlists_item in playlists %}
+                            <option onclick='add_to_playlist("{{playlists_item.title}}", "{{track.id}}")'>{{playlists_item.title}}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -48,9 +52,7 @@
 
     function add_to_playlist(playlist_title, track_id){
         entry = {
-
             playlist_title:playlist_title,
-
             track_id:track_id
         }
         console.log(entry);

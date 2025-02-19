@@ -28,15 +28,15 @@
             </form>
         </div>
     </div>
-    {% if search_form.search_field.data != None and search_form.search_field.data != "" %}
+    {% if search_form.search_field.data != None and search_form.search_field.data.strip() != "" %}
         <div class="search-response">
             <h2>Searching for: '{{search_form.search_field.data}}'</h2>
         </div>
     {% endif %}
-    <div class="catalogue-list">
+    <div class="playlist-list">
         {% for playlist in playlists %}
-            <div class="catalogue-item">
-                <a href="{{url_for('home_bp.home')}}"><h2>{{playlist.title}}</h2></a>
+            <div class="playlist-item">
+                <a href='{{url_for("playlists_bp.playlist", playlist=playlist.title)}}'><h2>{{playlist.title}}</h2></a>
             </div>
         {% endfor %}
     </div>

@@ -195,6 +195,10 @@ input[type=checkbox]:checked{
     width: 100%;
 }
 
+.add-track-button{
+    margin-top: 1rem;
+}
+
 .results{
     margin: 0%;
     padding: 0%;
@@ -290,7 +294,51 @@ button:hover{
     overflow-y: auto;
 }
 
+.catalogue-row{
+    margin: 1% 15% 1% 15%;
+    padding: 0%;
+    background-color: rgba(0, 0, 0, 0.0);
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
 .catalogue-item{
+    margin: 0% 1% 0% 1%;
+    padding: 0%;
+    background-color: rgba(0, 0, 0, 0.0);
+
+    border-style: solid;
+    border-color: rgba(255,255,255,0.2);
+    border-radius: 0.5rem;
+    border-width: 0.2rem;
+    color: white;
+    padding: 0.5rem;
+    font-size: max(1rem, 1.5vw);
+    transition: background-color 0.3s;
+    transition: border-color 0.3s;
+    text-align: center;
+
+    a {
+        color: white;
+    }
+}
+
+.catalogue-item:hover{
+    background-color: rgba(0,0,0,0.5);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+
+#catalogue-selector-container{
+    padding: 0rem;
+}
+
+.playlist-list{
+    width: 100%;
+    height: 70vh;
+    overflow-y: auto;
+}
+
+.playlist-item{
     margin: 1% 15% 1% 15%;
     padding: 0%;
     background-color: rgba(0, 0, 0, 0.0);
@@ -304,13 +352,39 @@ button:hover{
     font-size: max(1rem, 1.5vw);
     transition: background-color 0.3s;
     transition: border-color 0.3s;
+    text-align: center;
 
     a {
         color: white;
     }
 }
 
-.catalogue-item:hover{
+.playlist-item:hover{
     background-color: rgba(0,0,0,0.5);
     border-color: rgba(255, 255, 255, 0.8);
+}
+
+select{
+    appearance: none;
+    -webkit-appearance: none;
+    text-align: center;
+    border-style: none;
+    background-color: transparent;
+    color: white;
+    font-size: max(1.5rem, 2vw);
+    margin: 0%;
+    padding: 0%;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    
+}
+option{
+    margin: 0%;
+    padding: 0%;
+    color: black;
+}
+
+.playlist-header{
+    margin: 1.5rem 0rem 0rem 0rem;
 }

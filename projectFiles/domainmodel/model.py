@@ -46,11 +46,11 @@ class Track:
     
 class Playlist:
     """Class representing a playlist, can hold multiple tracks."""
-    def __init__(self, user, title="Untitled", tracks=None):
+    def __init__(self, user, title="Untitled", tracks=None, id=None):
         self.user = user
-        self.title = title
+        if title != "":
+            self.title = title
         if tracks is None:
-            # self.tracks = {}
             self.tracks = []
         else:
             self.tracks = tracks
